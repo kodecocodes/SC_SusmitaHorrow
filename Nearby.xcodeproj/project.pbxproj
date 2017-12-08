@@ -12,6 +12,8 @@
 		7888A2231FDA9D6C00144318 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7888A21D1FDA9D6C00144318 /* Main.storyboard */; };
 		7888A2241FDA9D6C00144318 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7888A21F1FDA9D6C00144318 /* AppDelegate.swift */; };
 		7888A2251FDA9D6C00144318 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7888A2201FDA9D6C00144318 /* Info.plist */; };
+		7888A22A1FDAA0A100144318 /* RestaurantListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7888A2291FDAA0A100144318 /* RestaurantListProtocols.swift */; };
+		7888A22D1FDAA0EC00144318 /* VIPERProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7888A22C1FDAA0EC00144318 /* VIPERProtocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		7888A21E1FDA9D6C00144318 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7888A21F1FDA9D6C00144318 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7888A2201FDA9D6C00144318 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7888A2291FDAA0A100144318 /* RestaurantListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListProtocols.swift; sourceTree = "<group>"; };
+		7888A22C1FDAA0EC00144318 /* VIPERProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIPERProtocols.swift; sourceTree = "<group>"; };
 		D2A5F2001F4A9144005CD714 /* Nearby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nearby.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -37,6 +41,8 @@
 		7888A21A1FDA9D6C00144318 /* Nearby */ = {
 			isa = PBXGroup;
 			children = (
+				7888A22B1FDAA0BB00144318 /* Common */,
+				7888A2261FDA9FF900144318 /* Usecases */,
 				7888A21B1FDA9D6C00144318 /* LaunchScreen.xib */,
 				7888A21C1FDA9D6C00144318 /* Assets.xcassets */,
 				7888A21D1FDA9D6C00144318 /* Main.storyboard */,
@@ -44,6 +50,38 @@
 				7888A2201FDA9D6C00144318 /* Info.plist */,
 			);
 			path = Nearby;
+			sourceTree = "<group>";
+		};
+		7888A2261FDA9FF900144318 /* Usecases */ = {
+			isa = PBXGroup;
+			children = (
+				7888A2271FDAA01900144318 /* RestaurantList */,
+				7888A2281FDAA04B00144318 /* RestaurantDetail */,
+			);
+			path = Usecases;
+			sourceTree = "<group>";
+		};
+		7888A2271FDAA01900144318 /* RestaurantList */ = {
+			isa = PBXGroup;
+			children = (
+				7888A2291FDAA0A100144318 /* RestaurantListProtocols.swift */,
+			);
+			path = RestaurantList;
+			sourceTree = "<group>";
+		};
+		7888A2281FDAA04B00144318 /* RestaurantDetail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = RestaurantDetail;
+			sourceTree = "<group>";
+		};
+		7888A22B1FDAA0BB00144318 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7888A22C1FDAA0EC00144318 /* VIPERProtocols.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		D2A5F1F71F4A9143005CD714 = {
@@ -137,6 +175,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7888A22A1FDAA0A100144318 /* RestaurantListProtocols.swift in Sources */,
+				7888A22D1FDAA0EC00144318 /* VIPERProtocols.swift in Sources */,
 				7888A2241FDA9D6C00144318 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
