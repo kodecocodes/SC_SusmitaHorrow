@@ -11,12 +11,14 @@
 		7888A2221FDA9D6C00144318 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7888A21C1FDA9D6C00144318 /* Assets.xcassets */; };
 		7888A2231FDA9D6C00144318 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7888A21D1FDA9D6C00144318 /* Main.storyboard */; };
 		7888A2241FDA9D6C00144318 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7888A21F1FDA9D6C00144318 /* AppDelegate.swift */; };
-		7888A2251FDA9D6C00144318 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7888A2201FDA9D6C00144318 /* Info.plist */; };
 		7888A22A1FDAA0A100144318 /* RestaurantListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7888A2291FDAA0A100144318 /* RestaurantListProtocols.swift */; };
 		7888A22D1FDAA0EC00144318 /* VIPERProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7888A22C1FDAA0EC00144318 /* VIPERProtocols.swift */; };
+		C2BB5AE28772C78363012C17 /* Pods_Nearby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA9ECB84B03D48C3517D93D1 /* Pods_Nearby.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B1709ED35C6DE281862D0A4 /* Pods-Nearby.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nearby.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nearby/Pods-Nearby.debug.xcconfig"; sourceTree = "<group>"; };
+		374A6CC9A6AF8DAFC7E124C2 /* Pods-Nearby.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nearby.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nearby/Pods-Nearby.release.xcconfig"; sourceTree = "<group>"; };
 		7888A21B1FDA9D6C00144318 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		7888A21C1FDA9D6C00144318 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7888A21E1FDA9D6C00144318 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -25,6 +27,7 @@
 		7888A2291FDAA0A100144318 /* RestaurantListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListProtocols.swift; sourceTree = "<group>"; };
 		7888A22C1FDAA0EC00144318 /* VIPERProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIPERProtocols.swift; sourceTree = "<group>"; };
 		D2A5F2001F4A9144005CD714 /* Nearby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nearby.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA9ECB84B03D48C3517D93D1 /* Pods_Nearby.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nearby.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,12 +35,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2BB5AE28772C78363012C17 /* Pods_Nearby.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		511561B3EFD1081CC1D9D198 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1B1709ED35C6DE281862D0A4 /* Pods-Nearby.debug.xcconfig */,
+				374A6CC9A6AF8DAFC7E124C2 /* Pods-Nearby.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		7888A21A1FDA9D6C00144318 /* Nearby */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,11 +97,21 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		C8D7E68EDCD1758D087E0604 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EA9ECB84B03D48C3517D93D1 /* Pods_Nearby.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D2A5F1F71F4A9143005CD714 = {
 			isa = PBXGroup;
 			children = (
 				7888A21A1FDA9D6C00144318 /* Nearby */,
 				D2A5F2011F4A9144005CD714 /* Products */,
+				511561B3EFD1081CC1D9D198 /* Pods */,
+				C8D7E68EDCD1758D087E0604 /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -109,9 +132,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2A5F2121F4A9144005CD714 /* Build configuration list for PBXNativeTarget "Nearby" */;
 			buildPhases = (
+				880A82932A38A9D60D4342F7 /* [CP] Check Pods Manifest.lock */,
 				D2A5F1FC1F4A9144005CD714 /* Sources */,
 				D2A5F1FD1F4A9144005CD714 /* Frameworks */,
 				D2A5F1FE1F4A9144005CD714 /* Resources */,
+				ECDE0C344BD9088E64EC5155 /* [CP] Embed Pods Frameworks */,
+				285A4A9087E7A0783622EA69 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -161,7 +187,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7888A2251FDA9D6C00144318 /* Info.plist in Resources */,
 				7888A2231FDA9D6C00144318 /* Main.storyboard in Resources */,
 				7888A2221FDA9D6C00144318 /* Assets.xcassets in Resources */,
 				7888A2211FDA9D6C00144318 /* LaunchScreen.xib in Resources */,
@@ -169,6 +194,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		285A4A9087E7A0783622EA69 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Nearby/Pods-Nearby-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		880A82932A38A9D60D4342F7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Nearby-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ECDE0C344BD9088E64EC5155 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Nearby/Pods-Nearby-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Nearby/Pods-Nearby-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D2A5F1FC1F4A9144005CD714 /* Sources */ = {
@@ -304,6 +383,7 @@
 		};
 		D2A5F2131F4A9144005CD714 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B1709ED35C6DE281862D0A4 /* Pods-Nearby.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -319,6 +399,7 @@
 		};
 		D2A5F2141F4A9144005CD714 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 374A6CC9A6AF8DAFC7E124C2 /* Pods-Nearby.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
