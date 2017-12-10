@@ -7,6 +7,7 @@ use_frameworks!
 target :Nearby do
 	pod 'Alamofire', '~> 4.0'
 	pod 'ReachabilitySwift', '~> 3'
+	pod 'Marshal', '~> 1.2'
 end
 
 # Do not change the following. This is a workaround for FRAMEWORK_SEARCH_PATHS not containing ${inherited}.
