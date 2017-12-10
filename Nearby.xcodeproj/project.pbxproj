@@ -13,6 +13,12 @@
 		7888A2241FDA9D6C00144318 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7888A21F1FDA9D6C00144318 /* AppDelegate.swift */; };
 		7888A22A1FDAA0A100144318 /* RestaurantListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7888A2291FDAA0A100144318 /* RestaurantListProtocols.swift */; };
 		7888A22D1FDAA0EC00144318 /* VIPERProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7888A22C1FDAA0EC00144318 /* VIPERProtocols.swift */; };
+		7888A2301FDAAA2300144318 /* BaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7888A22F1FDAAA2300144318 /* BaseAPIClient.swift */; };
+		78E5AFA81FDD847A00FB5BC7 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E5AFA71FDD847A00FB5BC7 /* Resource.swift */; };
+		78E5AFAA1FDD84D300FB5BC7 /* RequestRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E5AFA91FDD84D300FB5BC7 /* RequestRouterProtocol.swift */; };
+		78E5AFAC1FDD858E00FB5BC7 /* DataResponse+Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E5AFAB1FDD858E00FB5BC7 /* DataResponse+Parsing.swift */; };
+		78E5AFAE1FDD866100FB5BC7 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E5AFAD1FDD866100FB5BC7 /* Error.swift */; };
+		78E5AFB01FDD8ACE00FB5BC7 /* RequestRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E5AFAF1FDD8ACE00FB5BC7 /* RequestRouter.swift */; };
 		C2BB5AE28772C78363012C17 /* Pods_Nearby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA9ECB84B03D48C3517D93D1 /* Pods_Nearby.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +32,12 @@
 		7888A2201FDA9D6C00144318 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7888A2291FDAA0A100144318 /* RestaurantListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListProtocols.swift; sourceTree = "<group>"; };
 		7888A22C1FDAA0EC00144318 /* VIPERProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIPERProtocols.swift; sourceTree = "<group>"; };
+		7888A22F1FDAAA2300144318 /* BaseAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPIClient.swift; sourceTree = "<group>"; };
+		78E5AFA71FDD847A00FB5BC7 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		78E5AFA91FDD84D300FB5BC7 /* RequestRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRouterProtocol.swift; sourceTree = "<group>"; };
+		78E5AFAB1FDD858E00FB5BC7 /* DataResponse+Parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataResponse+Parsing.swift"; sourceTree = "<group>"; };
+		78E5AFAD1FDD866100FB5BC7 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		78E5AFAF1FDD8ACE00FB5BC7 /* RequestRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRouter.swift; sourceTree = "<group>"; };
 		D2A5F2001F4A9144005CD714 /* Nearby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nearby.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA9ECB84B03D48C3517D93D1 /* Pods_Nearby.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nearby.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -56,6 +68,7 @@
 			children = (
 				7888A22B1FDAA0BB00144318 /* Common */,
 				7888A2261FDA9FF900144318 /* Usecases */,
+				7888A22E1FDAA7E700144318 /* Webservices */,
 				7888A21B1FDA9D6C00144318 /* LaunchScreen.xib */,
 				7888A21C1FDA9D6C00144318 /* Assets.xcassets */,
 				7888A21D1FDA9D6C00144318 /* Main.storyboard */,
@@ -95,6 +108,19 @@
 				7888A22C1FDAA0EC00144318 /* VIPERProtocols.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		7888A22E1FDAA7E700144318 /* Webservices */ = {
+			isa = PBXGroup;
+			children = (
+				7888A22F1FDAAA2300144318 /* BaseAPIClient.swift */,
+				78E5AFA71FDD847A00FB5BC7 /* Resource.swift */,
+				78E5AFAD1FDD866100FB5BC7 /* Error.swift */,
+				78E5AFA91FDD84D300FB5BC7 /* RequestRouterProtocol.swift */,
+				78E5AFAB1FDD858E00FB5BC7 /* DataResponse+Parsing.swift */,
+				78E5AFAF1FDD8ACE00FB5BC7 /* RequestRouter.swift */,
+			);
+			path = Webservices;
 			sourceTree = "<group>";
 		};
 		C8D7E68EDCD1758D087E0604 /* Frameworks */ = {
@@ -237,11 +263,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Nearby/Pods-Nearby-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Marshal/Marshal.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/ReachabilitySwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Marshal.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReachabilitySwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,9 +284,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78E5AFAE1FDD866100FB5BC7 /* Error.swift in Sources */,
+				78E5AFAC1FDD858E00FB5BC7 /* DataResponse+Parsing.swift in Sources */,
 				7888A22A1FDAA0A100144318 /* RestaurantListProtocols.swift in Sources */,
 				7888A22D1FDAA0EC00144318 /* VIPERProtocols.swift in Sources */,
+				7888A2301FDAAA2300144318 /* BaseAPIClient.swift in Sources */,
+				78E5AFA81FDD847A00FB5BC7 /* Resource.swift in Sources */,
+				78E5AFAA1FDD84D300FB5BC7 /* RequestRouterProtocol.swift in Sources */,
 				7888A2241FDA9D6C00144318 /* AppDelegate.swift in Sources */,
+				78E5AFB01FDD8ACE00FB5BC7 /* RequestRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
