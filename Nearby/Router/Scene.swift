@@ -27,48 +27,18 @@
 /// THE SOFTWARE.
 
 import Foundation
+import UIKit
 
-class RestaurantListPresenter {
-	let restaurantListInteractor: RestaurantListInteractorProtocol
-	weak var restaurantListView: RestaurantListCommandListenerProtocol? = nil
-	weak var scenePresenter: ScenePresenter? = nil
+enum Scene {
+	case restaurantList
+	case restaurantDetail
 
-	init(interactor: RestaurantListInteractorProtocol) {
-		self.restaurantListInteractor = interactor
-	}
-
-	fileprivate func fetchRestaurantList() {
-		self.restaurantListInteractor.fetchNearby { result in
-			switch result {
-			case .success(let suggestedRestaurants):
-				let viewModels = suggestedRestaurants.list.map { RestaurantViewModel(restaurant: $0) }
-				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.populateList(viewModels: viewModels))
-			case .failure(let error):
-				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.showError(
-					title: error.title, message: error.errorDescription ?? ""))
-			}
-		}
-	}
-}
-
-extension RestaurantListPresenter: RestaurantListPresenterProtocol {
-	var interactor: RestaurantListInteractorProtocol {
-		return self.restaurantListInteractor
-	}
-
-	var commandListener: RestaurantListCommandListenerProtocol? {
-		get {
-			return self.restaurantListView
-		}
-		set {
-			self.restaurantListView = newValue
-		}
-	}
-
-	func handle(event: RestaurantListViewEvent) {
-		switch event {
-		case .viewDidLoad:
-			self.fetchRestaurantList()
+	func configure() -> UIViewController {
+		switch self {
+		case .restaurantList:
+			return UIViewController()
+		case .restaurantDetail:
+			return UIViewController()
 		}
 	}
 }

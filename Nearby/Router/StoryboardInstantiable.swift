@@ -27,48 +27,20 @@
 /// THE SOFTWARE.
 
 import Foundation
+import UIKit
 
-class RestaurantListPresenter {
-	let restaurantListInteractor: RestaurantListInteractorProtocol
-	weak var restaurantListView: RestaurantListCommandListenerProtocol? = nil
-	weak var scenePresenter: ScenePresenter? = nil
-
-	init(interactor: RestaurantListInteractorProtocol) {
-		self.restaurantListInteractor = interactor
-	}
-
-	fileprivate func fetchRestaurantList() {
-		self.restaurantListInteractor.fetchNearby { result in
-			switch result {
-			case .success(let suggestedRestaurants):
-				let viewModels = suggestedRestaurants.list.map { RestaurantViewModel(restaurant: $0) }
-				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.populateList(viewModels: viewModels))
-			case .failure(let error):
-				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.showError(
-					title: error.title, message: error.errorDescription ?? ""))
-			}
-		}
-	}
+protocol StoryboardInstantiable {
+	static var storyboardId: String { get }
+	static var storyboardName: String { get }
 }
 
-extension RestaurantListPresenter: RestaurantListPresenterProtocol {
-	var interactor: RestaurantListInteractorProtocol {
-		return self.restaurantListInteractor
+extension StoryboardInstantiable where Self: UIViewController {
+	static var storyboardInstance: Self {
+		let storyboard = UIStoryboard(name: storyboardName, bundle: Bundle.main)
+		let viewController = storyboard.instantiateViewController(withIdentifier: storyboardId)
+		return viewController as! Self
 	}
-
-	var commandListener: RestaurantListCommandListenerProtocol? {
-		get {
-			return self.restaurantListView
-		}
-		set {
-			self.restaurantListView = newValue
-		}
-	}
-
-	func handle(event: RestaurantListViewEvent) {
-		switch event {
-		case .viewDidLoad:
-			self.fetchRestaurantList()
-		}
+	static var storyboardId: String {
+		return NSStringFromClass(self).components(separatedBy:(".")).last!
 	}
 }

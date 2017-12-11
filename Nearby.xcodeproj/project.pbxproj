@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7836DA941FDF80D4003042D6 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7836DA931FDF80D4003042D6 /* Router.swift */; };
 		7859C7F21FDE7EBC00228716 /* ServiceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859C7F11FDE7EBC00228716 /* ServiceResult.swift */; };
 		7859C7F51FDE82E300228716 /* RestaurantListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859C7F31FDE82E200228716 /* RestaurantListPresenter.swift */; };
 		7859C7F61FDE82E300228716 /* RestaurantListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859C7F41FDE82E200228716 /* RestaurantListInteractor.swift */; };
 		7859C7F81FDE835400228716 /* RestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859C7F71FDE835400228716 /* RestaurantViewModel.swift */; };
+		7859C7FA1FDEAE9B00228716 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859C7F91FDEAE9B00228716 /* Scene.swift */; };
+		7859C7FF1FDEE58100228716 /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859C7FE1FDEE58100228716 /* StoryboardInstantiable.swift */; };
 		7888A2211FDA9D6C00144318 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7888A21B1FDA9D6C00144318 /* LaunchScreen.xib */; };
 		7888A2221FDA9D6C00144318 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7888A21C1FDA9D6C00144318 /* Assets.xcassets */; };
 		7888A2231FDA9D6C00144318 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7888A21D1FDA9D6C00144318 /* Main.storyboard */; };
@@ -35,10 +38,13 @@
 /* Begin PBXFileReference section */
 		1B1709ED35C6DE281862D0A4 /* Pods-Nearby.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nearby.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nearby/Pods-Nearby.debug.xcconfig"; sourceTree = "<group>"; };
 		374A6CC9A6AF8DAFC7E124C2 /* Pods-Nearby.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nearby.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nearby/Pods-Nearby.release.xcconfig"; sourceTree = "<group>"; };
+		7836DA931FDF80D4003042D6 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		7859C7F11FDE7EBC00228716 /* ServiceResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceResult.swift; sourceTree = "<group>"; };
 		7859C7F31FDE82E200228716 /* RestaurantListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantListPresenter.swift; sourceTree = "<group>"; };
 		7859C7F41FDE82E200228716 /* RestaurantListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantListInteractor.swift; sourceTree = "<group>"; };
 		7859C7F71FDE835400228716 /* RestaurantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewModel.swift; sourceTree = "<group>"; };
+		7859C7F91FDEAE9B00228716 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		7859C7FE1FDEE58100228716 /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
 		7888A21B1FDA9D6C00144318 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		7888A21C1FDA9D6C00144318 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7888A21E1FDA9D6C00144318 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -83,11 +89,22 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		7859C7FB1FDEAEAB00228716 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				7836DA931FDF80D4003042D6 /* Router.swift */,
+				7859C7F91FDEAE9B00228716 /* Scene.swift */,
+				7859C7FE1FDEE58100228716 /* StoryboardInstantiable.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		7888A21A1FDA9D6C00144318 /* Nearby */ = {
 			isa = PBXGroup;
 			children = (
 				7888A22B1FDAA0BB00144318 /* Common */,
 				7888A2261FDA9FF900144318 /* Usecases */,
+				7859C7FB1FDEAEAB00228716 /* Router */,
 				789451D91FDE1CE200B95FB0 /* Entities */,
 				789451E01FDE2C6300B95FB0 /* Entities+Parsing */,
 				7888A22E1FDAA7E700144318 /* Webservices */,
@@ -338,11 +355,14 @@
 				789451E61FDE2F6F00B95FB0 /* SuggestedRestaurants+Parsing.swift in Sources */,
 				789451E21FDE2C8C00B95FB0 /* Location+Parsing.swift in Sources */,
 				789451E41FDE2E3200B95FB0 /* Restaurant+Parsing.swift in Sources */,
+				7859C7FF1FDEE58100228716 /* StoryboardInstantiable.swift in Sources */,
 				7888A22A1FDAA0A100144318 /* RestaurantListProtocols.swift in Sources */,
 				7888A22D1FDAA0EC00144318 /* VIPERProtocols.swift in Sources */,
 				7888A2301FDAAA2300144318 /* BaseAPIClient.swift in Sources */,
 				7859C7F61FDE82E300228716 /* RestaurantListInteractor.swift in Sources */,
+				7859C7FA1FDEAE9B00228716 /* Scene.swift in Sources */,
 				7859C7F81FDE835400228716 /* RestaurantViewModel.swift in Sources */,
+				7836DA941FDF80D4003042D6 /* Router.swift in Sources */,
 				78E5AFA81FDD847A00FB5BC7 /* Resource.swift in Sources */,
 				789451DF1FDE2C4A00B95FB0 /* SuggestedRestaurants.swift in Sources */,
 				7859C7F21FDE7EBC00228716 /* ServiceResult.swift in Sources */,
