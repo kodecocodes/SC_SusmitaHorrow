@@ -28,25 +28,38 @@
 
 import Foundation
 
-enum RestaurantListViewEvent: ViewEvent {
-	case viewDidLoad
+struct RestaurantViewModel {
+	let name: String
+	let address: String
+	let rating: String
+	let price: String
+	let verified: Bool
+
+	init(name: String, address: String, rating: String, price: String, verified: Bool) {
+		self.name = name
+		self.address = address
+		self.rating = rating
+		self.price = price
+		self.verified = verified
+	}
+
+	init(restaurant: Restaurant) {
+		self.name = restaurant.name
+		self.price = String(restaurant.price)
+		self.verified = restaurant.verified
+		if let rating = restaurant.rating {
+			self.rating = String(rating)
+		} else {
+			self.rating = "Not Available"
+		}
+		if let locationAddress = restaurant.location.address {
+			self.address = locationAddress
+		} else {
+			self.address = restaurant.location.formattedAddress.reduce("", { (result, string) in
+				return result + ", " + string
+			})
+		}
+	}
 }
 
-enum RestaurantListPresenterCommand: PresenterCommand {
-	case populateList(viewModels: [RestaurantViewModel])
-	case showError(title: String, message: String)
-}
 
-protocol RestaurantListPresenterProtocol {
-	var interactor: RestaurantListInteractorProtocol { get }
-	var commandListener: RestaurantListCommandListenerProtocol? { get set }
-	func handle(event: RestaurantListViewEvent)
-}
-
-protocol RestaurantListCommandListenerProtocol: class {
-	func handle(command: RestaurantListPresenterCommand)
-}
-
-protocol RestaurantListInteractorProtocol {
-	func fetchNearby(completionBlock: @escaping RequestCompletionBlock<SuggestedRestaurants>)
-}

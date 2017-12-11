@@ -39,8 +39,9 @@ class RestaurantListPresenter {
 	fileprivate func fetchRestaurantList() {
 		self.restaurantListInteractor.fetchNearby { result in
 			switch result {
-			case .success(let value):
-				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.populateList)
+			case .success(let suggestedRestaurants):
+				let viewModels = suggestedRestaurants.list.map { RestaurantViewModel(restaurant: $0) }
+				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.populateList(viewModels: viewModels))
 			case .failure(let error):
 				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.showError(
 					title: error.title, message: error.errorDescription ?? ""))

@@ -10,6 +10,7 @@
 		7859C7F21FDE7EBC00228716 /* ServiceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859C7F11FDE7EBC00228716 /* ServiceResult.swift */; };
 		7859C7F51FDE82E300228716 /* RestaurantListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859C7F31FDE82E200228716 /* RestaurantListPresenter.swift */; };
 		7859C7F61FDE82E300228716 /* RestaurantListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859C7F41FDE82E200228716 /* RestaurantListInteractor.swift */; };
+		7859C7F81FDE835400228716 /* RestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7859C7F71FDE835400228716 /* RestaurantViewModel.swift */; };
 		7888A2211FDA9D6C00144318 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7888A21B1FDA9D6C00144318 /* LaunchScreen.xib */; };
 		7888A2221FDA9D6C00144318 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7888A21C1FDA9D6C00144318 /* Assets.xcassets */; };
 		7888A2231FDA9D6C00144318 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7888A21D1FDA9D6C00144318 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 		7859C7F11FDE7EBC00228716 /* ServiceResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceResult.swift; sourceTree = "<group>"; };
 		7859C7F31FDE82E200228716 /* RestaurantListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantListPresenter.swift; sourceTree = "<group>"; };
 		7859C7F41FDE82E200228716 /* RestaurantListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantListInteractor.swift; sourceTree = "<group>"; };
+		7859C7F71FDE835400228716 /* RestaurantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewModel.swift; sourceTree = "<group>"; };
 		7888A21B1FDA9D6C00144318 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		7888A21C1FDA9D6C00144318 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7888A21E1FDA9D6C00144318 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				7888A2291FDAA0A100144318 /* RestaurantListProtocols.swift */,
 				7859C7F41FDE82E200228716 /* RestaurantListInteractor.swift */,
 				7859C7F31FDE82E200228716 /* RestaurantListPresenter.swift */,
+				7859C7F71FDE835400228716 /* RestaurantViewModel.swift */,
 			);
 			path = RestaurantList;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				7888A22D1FDAA0EC00144318 /* VIPERProtocols.swift in Sources */,
 				7888A2301FDAAA2300144318 /* BaseAPIClient.swift in Sources */,
 				7859C7F61FDE82E300228716 /* RestaurantListInteractor.swift in Sources */,
+				7859C7F81FDE835400228716 /* RestaurantViewModel.swift in Sources */,
 				78E5AFA81FDD847A00FB5BC7 /* Resource.swift in Sources */,
 				789451DF1FDE2C4A00B95FB0 /* SuggestedRestaurants.swift in Sources */,
 				7859C7F21FDE7EBC00228716 /* ServiceResult.swift in Sources */,
