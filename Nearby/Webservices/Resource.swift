@@ -39,7 +39,7 @@ extension Resource where Value: Unmarshaling {
 	init(requestRouter: RequestRouterProtocol) {
 		self.init(requestRouter: requestRouter,
 		          parse: { jsonObject in
-								return try jsonObject.value(for: "data")
+								return try jsonObject.value(for: "response")
 		})
 	}
 }
@@ -48,7 +48,7 @@ extension Resource where Value: Collection, Value.Element: Unmarshaling {
 	init(requestRouter: RequestRouterProtocol) {
 		self.init(requestRouter: requestRouter,
 		          parse: { jsonObject in
-								let objects: [Value.Element] = try jsonObject.value(for: "data")
+								let objects: [Value.Element] = try jsonObject.value(for: "response")
 								return objects as! Value
 		})
 	}

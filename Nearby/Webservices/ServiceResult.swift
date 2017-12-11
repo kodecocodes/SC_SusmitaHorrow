@@ -1,4 +1,4 @@
-/// Copyright (c) 2017 Razeware LLC
+///// Copyright (c) 2017 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -26,19 +26,9 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import UIKit
-import Alamofire
+import Foundation
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-  var window: UIWindow?
-	let baseApiClient = BaseAPIClient.shared
-
-	func applicationDidFinishLaunching(_ application: UIApplication) {
-		let resource = Resource<SuggestedRestaurants>(requestRouter: RequestRouter.fetchList)
-		self.baseApiClient.request(resource) { result in
-			print(result)
-		}
-	}
+enum ServiceResult<Value> {
+	case success(Value)
+	case failure(ApplicationError)
 }
-

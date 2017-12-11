@@ -1,4 +1,4 @@
-/// Copyright (c) 2017 Razeware LLC
+///// Copyright (c) 2017 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -26,19 +26,19 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import UIKit
-import Alamofire
+import Foundation
+import Marshal
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-  var window: UIWindow?
-	let baseApiClient = BaseAPIClient.shared
-
-	func applicationDidFinishLaunching(_ application: UIApplication) {
-		let resource = Resource<SuggestedRestaurants>(requestRouter: RequestRouter.fetchList)
-		self.baseApiClient.request(resource) { result in
-			print(result)
-		}
+extension Location: Unmarshaling {
+	init(object: MarshaledObject) throws {
+		address = try object.value(for: "address")
+		crossStreet = try object.value(for: "crossStreet")
+		latitude = try object.value(for: "lat")
+		longitude = try object.value(for: "lng")
+		postalCode = try object.value(for: "postalCode")
+		city = try object.value(for: "city")
+		state = try object.value(for: "state")
+		country = try object.value(for: "country")
+		formattedAddress = try object.value(for: "formattedAddress") ?? []
 	}
 }
-

@@ -48,17 +48,17 @@ extension DataResponse {
 		}
 	}
 
-	func parseData() -> Result<JSONObject> {
+	func parseData() -> ServiceResult<JSONObject> {
 		do {
 			let object = try JSONParser.JSONObjectWithData(self.data!)
 			print("JSON to parse: \(String(describing: object))")
-			return Result.success(object)
+			return ServiceResult.success(object)
 
 		} catch {
 			if let parsingError = error as? MarshalError {
 				print(parsingError.description)
 			}
-			return Result.failure(parseError())
+			return ServiceResult.failure(parseError())
 		}
 	}
 }

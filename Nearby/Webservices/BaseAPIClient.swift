@@ -31,7 +31,7 @@ import Alamofire
 import ReachabilitySwift
 import Marshal
 
-typealias RequestCompletionBlock<T> = (Result<T>) -> ()
+typealias RequestCompletionBlock<T> = (ServiceResult<T>) -> ()
 
 class BaseAPIClient {
 	private var sessionManager = SessionManager()
@@ -49,21 +49,21 @@ class BaseAPIClient {
 			case .success(let dataResponse):
 				do {
 					let value = try resource.parse(dataResponse)
-					completionBlock(Result.success(value))
+					completionBlock(ServiceResult.success(value))
 				} catch {
 					let parsingError = error as! MarshalError
 					print(parsingError.description)
 
 					let processedError = ParsingError(error: parsingError)
-					completionBlock(Result.failure(processedError))
+					completionBlock(ServiceResult.failure(processedError))
 				}
 			case .failure(let anyError):
-				completionBlock(.failure(anyError))
+				completionBlock(ServiceResult.failure(anyError))
 			}
 		}
 	}
 
-	@discardableResult func request(urlRequest: URLRequestConvertible, completionBlock: @escaping (Result<JSONObject>) -> ()) -> DataRequest {
+	@discardableResult func request(urlRequest: URLRequestConvertible, completionBlock: @escaping (ServiceResult<JSONObject>) -> ()) -> DataRequest {
 		return sessionManager.request(urlRequest)
 			.debugLog()
 			.validate(statusCode: 200...299)
@@ -72,7 +72,7 @@ class BaseAPIClient {
 				if dataResponse.error != nil {
 					let isReachable = self?.reachability.isReachable ?? false
 					let processedError = isReachable ? dataResponse.parseError() : InternetError()
-					completionBlock(Result.failure(processedError))
+					completionBlock(ServiceResult.failure(processedError))
 				} else {
 					let result = dataResponse.parseData()
 					completionBlock(result)

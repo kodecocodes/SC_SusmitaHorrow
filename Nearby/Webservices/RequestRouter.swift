@@ -34,7 +34,7 @@ enum RequestRouter: RequestRouterProtocol {
 	var path: String {
 		switch self {
 		case .fetchList:
-			return "/venues/search"
+			return "/venues/explore"
 		}
 	}
 

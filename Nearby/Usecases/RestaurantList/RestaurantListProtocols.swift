@@ -49,7 +49,5 @@ protocol RestaurantListCommandListenerProtocol: class {
 }
 
 protocol RestaurantListInteractorProtocol {
-	func fetchNearby()
+	func fetchNearby(completionBlock: RequestCompletionBlock<SuggestedRestaurants>)
 }
-
-
