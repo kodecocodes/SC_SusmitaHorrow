@@ -28,25 +28,15 @@
 
 import Foundation
 
-enum RestaurantListViewEvent: ViewEvent {
-	case viewDidLoad
+class RestaurantListInteractor {
+	fileprivate var baseApiClient = BaseAPIClient.shared
 }
 
-enum RestaurantListPresenterCommand: PresenterCommand {
-	case populateList
-	case showError(title: String, message: String)
-}
-
-protocol RestaurantListPresenterProtocol {
-	var interactor: RestaurantListInteractorProtocol { get }
-	var commandListener: RestaurantListCommandListenerProtocol? { get set }
-	func handle(event: RestaurantListViewEvent)
-}
-
-protocol RestaurantListCommandListenerProtocol: class {
-	func handle(command: RestaurantListPresenterCommand)
-}
-
-protocol RestaurantListInteractorProtocol {
-	func fetchNearby(completionBlock: @escaping RequestCompletionBlock<SuggestedRestaurants>)
+extension RestaurantListInteractor: RestaurantListInteractorProtocol {
+	func fetchNearby(completionBlock: @escaping RequestCompletionBlock<SuggestedRestaurants>) {
+		let resource = Resource<SuggestedRestaurants>(requestRouter: RequestRouter.fetchList)
+		self.baseApiClient.request(resource) { result in
+			completionBlock(result)
+		}
+	}
 }

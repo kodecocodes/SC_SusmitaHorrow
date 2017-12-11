@@ -28,25 +28,45 @@
 
 import Foundation
 
-enum RestaurantListViewEvent: ViewEvent {
-	case viewDidLoad
+class RestaurantListPresenter {
+	let restaurantListInteractor: RestaurantListInteractorProtocol
+	weak var restaurantListView: RestaurantListCommandListenerProtocol? = nil
+
+	init(interactor: RestaurantListInteractorProtocol) {
+		self.restaurantListInteractor = interactor
+	}
+
+	fileprivate func fetchRestaurantList() {
+		self.restaurantListInteractor.fetchNearby { result in
+			switch result {
+			case .success(let value):
+				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.populateList)
+			case .failure(let error):
+				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.showError(
+					title: error.title, message: error.errorDescription ?? ""))
+			}
+		}
+	}
 }
 
-enum RestaurantListPresenterCommand: PresenterCommand {
-	case populateList
-	case showError(title: String, message: String)
-}
+extension RestaurantListPresenter: RestaurantListPresenterProtocol {
+	var interactor: RestaurantListInteractorProtocol {
+		return self.restaurantListInteractor
+	}
 
-protocol RestaurantListPresenterProtocol {
-	var interactor: RestaurantListInteractorProtocol { get }
-	var commandListener: RestaurantListCommandListenerProtocol? { get set }
-	func handle(event: RestaurantListViewEvent)
-}
+	var commandListener: RestaurantListCommandListenerProtocol? {
+		get {
+			return self.restaurantListView
+		}
+		set {
+			self.restaurantListView = newValue
+		}
+	}
 
-protocol RestaurantListCommandListenerProtocol: class {
-	func handle(command: RestaurantListPresenterCommand)
-}
-
-protocol RestaurantListInteractorProtocol {
-	func fetchNearby(completionBlock: @escaping RequestCompletionBlock<SuggestedRestaurants>)
+	func handle(event: RestaurantListViewEvent) {
+		switch event {
+		case .viewDidLoad:
+			self.fetchRestaurantList()
+		}
+	}
 }
