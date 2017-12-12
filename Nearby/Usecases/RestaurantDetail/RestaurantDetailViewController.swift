@@ -31,9 +31,25 @@ import UIKit
 class RestaurantDetailViewController: UIViewController {
 	var presenter: RestauranDetailPresenterProtocol!
 	
+	@IBOutlet var nameLabel: UILabel!
+	@IBOutlet var likeCountLabel: UILabel!
+	@IBOutlet var checkinsCountLabel: UILabel!
+	@IBOutlet var usersCountLabel: UILabel!
+	@IBOutlet var tipCountLabel: UILabel!
+	@IBOutlet var visitsCountLabel: UILabel!
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		presenter.handle(event: .viewDidLoad)
+	}
+
+	private func configureDetailView(model: RestaurantDetailViewModel) {
+		self.nameLabel.text = model.restaurantViewModel.name
+		self.likeCountLabel.text = model.likeCount
+		self.checkinsCountLabel.text = model.restaurantStatModel.checkinsCount
+		self.usersCountLabel.text = model.restaurantStatModel.usersCount
+		self.tipCountLabel.text = model.restaurantStatModel.tipCount
+		self.visitsCountLabel.text = model.restaurantStatModel.visitsCount
 	}
 }
 
@@ -47,7 +63,7 @@ extension RestaurantDetailViewController: RestaurantDetailCommandListenerProtoco
 	func handle(command: RestaurantDetailPresenterCommand) {
 		switch command {
 		case .populateDetail(let viewModel):
-			break
+			self.configureDetailView(model: viewModel)
 		case .showError(let title, let message):
 			self.showAlert(title: title, message: message)
 		}

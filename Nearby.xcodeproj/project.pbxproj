@@ -167,11 +167,11 @@
 			isa = PBXGroup;
 			children = (
 				7836DA971FDF8208003042D6 /* Cells */,
+				789AA26A1FDFD47B0022EA93 /* ViewModels */,
 				7888A2291FDAA0A100144318 /* RestaurantListProtocols.swift */,
 				7836DA951FDF81F4003042D6 /* RestaurantListViewController.swift */,
 				7859C7F41FDE82E200228716 /* RestaurantListInteractor.swift */,
 				7859C7F31FDE82E200228716 /* RestaurantListPresenter.swift */,
-				7859C7F71FDE835400228716 /* RestaurantViewModel.swift */,
 			);
 			path = RestaurantList;
 			sourceTree = "<group>";
@@ -179,12 +179,11 @@
 		7888A2281FDAA04B00144318 /* RestaurantDetail */ = {
 			isa = PBXGroup;
 			children = (
+				789AA2691FDFD4660022EA93 /* ViewModels */,
 				7836DA9E1FDFB398003042D6 /* RestaurantDetailProtocols.swift */,
 				7836DA9C1FDF85F9003042D6 /* RestaurantDetailViewController.swift */,
 				789AA25F1FDFC1340022EA93 /* RestaurantDetailInteractor.swift */,
 				789AA2611FDFC1990022EA93 /* RestaurantDetailPresenter.swift */,
-				789AA2631FDFC1D90022EA93 /* RestaurantDetailViewModel.swift */,
-				789AA2671FDFD2940022EA93 /* RestaurantStatViewModel.swift */,
 			);
 			path = RestaurantDetail;
 			sourceTree = "<group>";
@@ -234,6 +233,23 @@
 				7836DAA61FDFBBDF003042D6 /* RestaurantDetail+Parsing.swift */,
 			);
 			path = "Entities+Parsing";
+			sourceTree = "<group>";
+		};
+		789AA2691FDFD4660022EA93 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				789AA2631FDFC1D90022EA93 /* RestaurantDetailViewModel.swift */,
+				789AA2671FDFD2940022EA93 /* RestaurantStatViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		789AA26A1FDFD47B0022EA93 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7859C7F71FDE835400228716 /* RestaurantViewModel.swift */,
+			);
+			name = ViewModels;
 			sourceTree = "<group>";
 		};
 		C8D7E68EDCD1758D087E0604 /* Frameworks */ = {

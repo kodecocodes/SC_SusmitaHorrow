@@ -36,7 +36,7 @@ struct RestaurantDetailViewModel {
 	init(restaurantDetail: RestaurantDetail) {
 		self.restaurantViewModel = RestaurantViewModel(restaurant: restaurantDetail.restaurant)
 		self.restaurantStatModel = RestaurantStatViewModel(stats: restaurantDetail.stats)
-		self.likeCount = String(restaurantDetail.likeCount)
+		self.likeCount = "LikeCount = \(restaurantDetail.likeCount)"
 	}
 }
 

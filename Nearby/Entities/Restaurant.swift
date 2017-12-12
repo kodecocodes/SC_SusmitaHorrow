@@ -33,7 +33,7 @@ struct Restaurant  {
 	let name: String
 	let location: Location
 	let rating: Double?
-	let price: Double
+	let price: Int
 	let verified: Bool
 }
 

@@ -45,18 +45,18 @@ struct RestaurantViewModel {
 
 	init(restaurant: Restaurant) {
 		self.name = restaurant.name
-		self.price = String(restaurant.price)
+		self.price = "Price Tier: \(restaurant.price)"
 		self.verified = restaurant.verified
 		if let rating = restaurant.rating {
-			self.rating = String(rating)
+			self.rating = "Rating: \(rating)"
 		} else {
-			self.rating = "Not Available"
+			self.rating = ""
 		}
 		if let locationAddress = restaurant.location.address {
 			self.address = locationAddress
 		} else {
 			self.address = restaurant.location.formattedAddress.reduce("", { (result, string) in
-				return result + ", " + string
+				return string.isEmpty ? result : (result + ", " + string)
 			})
 		}
 	}

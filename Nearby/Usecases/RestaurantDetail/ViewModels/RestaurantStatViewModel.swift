@@ -42,9 +42,11 @@ struct RestaurantStatViewModel {
 	}
 
 	init(stats: RestaurantStats) {
-		self.checkinsCount = String(stats.checkinsCount)
-		self.usersCount = String(stats.usersCount)
-		self.tipCount = String(stats.tipCount)
-		self.visitsCount = String(stats.visitsCount)
+		self.init(
+			checkinsCount: "Checkins: \(stats.checkinsCount)",
+			usersCount: "User count: \(stats.usersCount)",
+			tipCount: "Tip count: \(stats.tipCount)",
+			visitsCount: "Visits count: \(stats.visitsCount)"
+		)
 	}
 }

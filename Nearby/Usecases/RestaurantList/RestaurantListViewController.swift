@@ -44,6 +44,8 @@ class RestaurantListViewController: UIViewController {
 		tableView.register(nib, forCellReuseIdentifier: "RestaurantTableViewCell")
 		tableView.dataSource = self
 		tableView.delegate = self
+		tableView.rowHeight = UITableViewAutomaticDimension
+		tableView.estimatedRowHeight = 150.0
 	}
 }
 
