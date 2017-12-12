@@ -26,35 +26,36 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import Foundation
 import UIKit
 
-enum Scene {
-	case restaurantList
-	case restaurantDetail
+class RestaurantDetailViewController: UIViewController {
 
-	func configure() -> UIViewController {
-		switch self {
-		case .restaurantList:
-			return configureRestaurantList()
-		case .restaurantDetail:
-			return configureRestaurantDetail()
-		}
-	}
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-	func configureRestaurantList() -> UINavigationController {
-		let restaurantListVC = RestaurantListViewController.storyboardInstance
-		let interactor = RestaurantListInteractor()
-		let presenter = RestaurantListPresenter(interactor: interactor)
-		presenter.scenePresenter = restaurantListVC
-		presenter.commandListener = restaurantListVC
-		restaurantListVC.presenter = presenter
-		let navigationController = UINavigationController(rootViewController: restaurantListVC)
-		return navigationController
-	}
+        // Do any additional setup after loading the view.
+    }
 
-	func configureRestaurantDetail() -> RestaurantDetailViewController {
-		let restaurantDetailVC = RestaurantDetailViewController.storyboardInstance
-		return restaurantDetailVC
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}
+
+extension RestaurantDetailViewController: StoryboardInstantiable {
+	static var storyboardName: String {
+		return "Main"
 	}
 }
