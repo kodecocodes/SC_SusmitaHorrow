@@ -1,4 +1,4 @@
-/// Copyright (c) 2017 Razeware LLC
+///// Copyright (c) 2017 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -27,18 +27,26 @@
 /// THE SOFTWARE.
 
 import UIKit
-import Alamofire
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-  var window: UIWindow?
-	let baseApiClient = BaseAPIClient.shared
+class RestaurantTableViewCell: UITableViewCell {
 
-	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
-		self.window = UIWindow(frame: UIScreen.main.bounds)
-		self.window?.makeKeyAndVisible()
-		Router.shared.launch(scene: .restaurantList)
-		return true
+	@IBOutlet var nameLabel: UILabel!
+	@IBOutlet var addressLabel: UILabel!
+	@IBOutlet var ratingLabel: UILabel!
+	@IBOutlet var priceLabel: UILabel!
+
+	override func awakeFromNib() {
+		super.awakeFromNib()
+	}
+
+	override func setSelected(_ selected: Bool, animated: Bool) {
+		super.setSelected(selected, animated: animated)
+	}
+
+	func configure(model: RestaurantViewModel) {
+		self.nameLabel.text = model.name
+		self.addressLabel.text = model.address
+		self.priceLabel.text = model.price
+		self.ratingLabel.text = model.rating
 	}
 }
-

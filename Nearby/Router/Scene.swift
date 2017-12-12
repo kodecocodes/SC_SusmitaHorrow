@@ -36,9 +36,19 @@ enum Scene {
 	func configure() -> UIViewController {
 		switch self {
 		case .restaurantList:
-			return UIViewController()
+			return configureRestaurantList()
 		case .restaurantDetail:
 			return UIViewController()
 		}
+	}
+
+	func configureRestaurantList() -> UINavigationController {
+		let restaurantListVC = RestaurantListViewController.storyboardInstance
+		let interactor = RestaurantListInteractor()
+		let presenter = RestaurantListPresenter(interactor: interactor)
+		presenter.commandListener = restaurantListVC
+		restaurantListVC.presenter = presenter
+		let navigationController = UINavigationController(rootViewController: restaurantListVC)
+		return navigationController
 	}
 }

@@ -1,10 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="008-O6-hMC">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Restaurant List View Controller-->
+        <scene sceneID="ciB-DX-789">
+            <objects>
+                <viewController storyboardIdentifier="RestaurantListViewController" id="008-O6-hMC" customClass="RestaurantListViewController" customModule="Nearby" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FKQ-8e-xZo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mIX-vc-I3j">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mIX-vc-I3j" firstAttribute="top" secondItem="wTj-AH-IL8" secondAttribute="top" id="LgE-ul-GOY"/>
+                            <constraint firstItem="wTj-AH-IL8" firstAttribute="bottom" secondItem="mIX-vc-I3j" secondAttribute="bottom" id="Lux-Kf-4hm"/>
+                            <constraint firstItem="wTj-AH-IL8" firstAttribute="trailing" secondItem="mIX-vc-I3j" secondAttribute="trailing" id="V4o-4h-0sL"/>
+                            <constraint firstItem="mIX-vc-I3j" firstAttribute="leading" secondItem="wTj-AH-IL8" secondAttribute="leading" id="yUK-4n-VuQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wTj-AH-IL8"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="mIX-vc-I3j" id="pSD-Jy-PS3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bG7-FF-AZ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-169" y="157"/>
+        </scene>
+    </scenes>
 </document>

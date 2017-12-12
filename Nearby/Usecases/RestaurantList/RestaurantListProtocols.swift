@@ -30,6 +30,7 @@ import Foundation
 
 enum RestaurantListViewEvent: ViewEvent {
 	case viewDidLoad
+	case didTapOnRestaurant(index: Int)
 }
 
 enum RestaurantListPresenterCommand: PresenterCommand {

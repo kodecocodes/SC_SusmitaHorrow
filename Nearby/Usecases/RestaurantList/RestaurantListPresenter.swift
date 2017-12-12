@@ -32,6 +32,7 @@ class RestaurantListPresenter {
 	let restaurantListInteractor: RestaurantListInteractorProtocol
 	weak var restaurantListView: RestaurantListCommandListenerProtocol? = nil
 	weak var scenePresenter: ScenePresenter? = nil
+	private var list: [Restaurant] = []
 
 	init(interactor: RestaurantListInteractorProtocol) {
 		self.restaurantListInteractor = interactor
@@ -41,8 +42,10 @@ class RestaurantListPresenter {
 		self.restaurantListInteractor.fetchNearby { result in
 			switch result {
 			case .success(let suggestedRestaurants):
-				let viewModels = suggestedRestaurants.list.map { RestaurantViewModel(restaurant: $0) }
+				self.list = suggestedRestaurants.list
+				let viewModels = self.list.map { RestaurantViewModel(restaurant: $0) }
 				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.populateList(viewModels: viewModels))
+
 			case .failure(let error):
 				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.showError(
 					title: error.title, message: error.errorDescription ?? ""))
@@ -69,6 +72,11 @@ extension RestaurantListPresenter: RestaurantListPresenterProtocol {
 		switch event {
 		case .viewDidLoad:
 			self.fetchRestaurantList()
+		case .didTapOnRestaurant(let index):
+			if let scenePresenter = self.scenePresenter {
+				Router.shared.present(scene: .restaurantDetail, scenePresenter: scenePresenter)
+			}
+//			self.list[index]
 		}
 	}
 }
