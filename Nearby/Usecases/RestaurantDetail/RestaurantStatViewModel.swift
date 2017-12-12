@@ -28,55 +28,23 @@
 
 import Foundation
 
-class RestaurantListPresenter {
-	let restaurantListInteractor: RestaurantListInteractorProtocol
-	weak var restaurantListView: RestaurantListCommandListenerProtocol? = nil
-	weak var scenePresenter: ScenePresenter? = nil
-	private var list: [Restaurant] = []
+struct RestaurantStatViewModel {
+	let checkinsCount: String
+	let usersCount: String
+	let tipCount: String
+	let visitsCount: String
 
-	init(interactor: RestaurantListInteractorProtocol) {
-		self.restaurantListInteractor = interactor
+	init(checkinsCount: String, usersCount: String, tipCount: String, visitsCount: String) {
+		self.checkinsCount = checkinsCount
+		self.usersCount = usersCount
+		self.tipCount = tipCount
+		self.visitsCount = visitsCount
 	}
 
-	fileprivate func fetchRestaurantList() {
-		self.restaurantListInteractor.fetchNearby { result in
-			switch result {
-			case .success(let suggestedRestaurants):
-				self.list = suggestedRestaurants.list
-				let viewModels = self.list.map { RestaurantViewModel(restaurant: $0) }
-				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.populateList(viewModels: viewModels))
-
-			case .failure(let error):
-				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.showError(
-					title: error.title, message: error.errorDescription ?? ""))
-			}
-		}
-	}
-}
-
-extension RestaurantListPresenter: RestaurantListPresenterProtocol {
-	var interactor: RestaurantListInteractorProtocol {
-		return self.restaurantListInteractor
-	}
-
-	var commandListener: RestaurantListCommandListenerProtocol? {
-		get {
-			return self.restaurantListView
-		}
-		set {
-			self.restaurantListView = newValue
-		}
-	}
-
-	func handle(event: RestaurantListViewEvent) {
-		switch event {
-		case .viewDidLoad:
-			self.fetchRestaurantList()
-		case .didTapOnRestaurant(let index):
-			let id = self.list[index].id
-			if let scenePresenter = self.scenePresenter {
-				Router.shared.present(scene: .restaurantDetail(id: id), scenePresenter: scenePresenter)
-			}
-		}
+	init(stats: RestaurantStats) {
+		self.checkinsCount = String(stats.checkinsCount)
+		self.usersCount = String(stats.usersCount)
+		self.tipCount = String(stats.tipCount)
+		self.visitsCount = String(stats.visitsCount)
 	}
 }

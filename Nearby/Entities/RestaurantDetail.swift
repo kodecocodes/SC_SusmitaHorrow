@@ -28,55 +28,8 @@
 
 import Foundation
 
-class RestaurantListPresenter {
-	let restaurantListInteractor: RestaurantListInteractorProtocol
-	weak var restaurantListView: RestaurantListCommandListenerProtocol? = nil
-	weak var scenePresenter: ScenePresenter? = nil
-	private var list: [Restaurant] = []
-
-	init(interactor: RestaurantListInteractorProtocol) {
-		self.restaurantListInteractor = interactor
-	}
-
-	fileprivate func fetchRestaurantList() {
-		self.restaurantListInteractor.fetchNearby { result in
-			switch result {
-			case .success(let suggestedRestaurants):
-				self.list = suggestedRestaurants.list
-				let viewModels = self.list.map { RestaurantViewModel(restaurant: $0) }
-				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.populateList(viewModels: viewModels))
-
-			case .failure(let error):
-				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.showError(
-					title: error.title, message: error.errorDescription ?? ""))
-			}
-		}
-	}
-}
-
-extension RestaurantListPresenter: RestaurantListPresenterProtocol {
-	var interactor: RestaurantListInteractorProtocol {
-		return self.restaurantListInteractor
-	}
-
-	var commandListener: RestaurantListCommandListenerProtocol? {
-		get {
-			return self.restaurantListView
-		}
-		set {
-			self.restaurantListView = newValue
-		}
-	}
-
-	func handle(event: RestaurantListViewEvent) {
-		switch event {
-		case .viewDidLoad:
-			self.fetchRestaurantList()
-		case .didTapOnRestaurant(let index):
-			let id = self.list[index].id
-			if let scenePresenter = self.scenePresenter {
-				Router.shared.present(scene: .restaurantDetail(id: id), scenePresenter: scenePresenter)
-			}
-		}
-	}
+struct RestaurantDetail {
+	let restaurant: Restaurant
+	let stats: RestaurantStats
+	var likeCount: Int
 }

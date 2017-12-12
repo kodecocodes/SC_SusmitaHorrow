@@ -28,55 +28,52 @@
 
 import Foundation
 
-class RestaurantListPresenter {
-	let restaurantListInteractor: RestaurantListInteractorProtocol
-	weak var restaurantListView: RestaurantListCommandListenerProtocol? = nil
-	weak var scenePresenter: ScenePresenter? = nil
-	private var list: [Restaurant] = []
+class RestaurantDetailPresenter {
+	weak var restaurantDetailView: RestaurantDetailCommandListenerProtocol? = nil
+	private let detailInteractor: RestaurantDetailInteractorProtocol
+	let detailId: String
 
-	init(interactor: RestaurantListInteractorProtocol) {
-		self.restaurantListInteractor = interactor
+	init(detailId: String, interactor: RestaurantDetailInteractorProtocol) {
+		self.detailId = detailId
+		self.detailInteractor = interactor
 	}
 
-	fileprivate func fetchRestaurantList() {
-		self.restaurantListInteractor.fetchNearby { result in
+	private func fetchDetail() {
+		self.detailInteractor.fetchDetail(id: self.detailId) { result in
 			switch result {
-			case .success(let suggestedRestaurants):
-				self.list = suggestedRestaurants.list
-				let viewModels = self.list.map { RestaurantViewModel(restaurant: $0) }
-				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.populateList(viewModels: viewModels))
+			case .success(let detail):
+				let viewModel = RestaurantDetailViewModel(restaurantDetail: detail)
+				self.restaurantDetailView?.handle(
+					command: RestaurantDetailPresenterCommand.populateDetail(viewModel: viewModel))
 
 			case .failure(let error):
-				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.showError(
-					title: error.title, message: error.errorDescription ?? ""))
+				self.restaurantDetailView?.handle(command:
+					RestaurantDetailPresenterCommand.showError(
+						title: error.title,
+						message: error.errorDescription ?? "Error"))
 			}
 		}
 	}
 }
 
-extension RestaurantListPresenter: RestaurantListPresenterProtocol {
-	var interactor: RestaurantListInteractorProtocol {
-		return self.restaurantListInteractor
+extension RestaurantDetailPresenter: RestauranDetailPresenterProtocol {
+	var interactor: RestaurantDetailInteractorProtocol {
+		return self.detailInteractor
 	}
-
-	var commandListener: RestaurantListCommandListenerProtocol? {
+	
+	var commandListener: RestaurantDetailCommandListenerProtocol? {
 		get {
-			return self.restaurantListView
+			return self.restaurantDetailView
 		}
 		set {
-			self.restaurantListView = newValue
+			self.restaurantDetailView = newValue
 		}
 	}
 
-	func handle(event: RestaurantListViewEvent) {
+	func handle(event: RestaurantDetailViewEvent) {
 		switch event {
 		case .viewDidLoad:
-			self.fetchRestaurantList()
-		case .didTapOnRestaurant(let index):
-			let id = self.list[index].id
-			if let scenePresenter = self.scenePresenter {
-				Router.shared.present(scene: .restaurantDetail(id: id), scenePresenter: scenePresenter)
-			}
+			fetchDetail()
 		}
 	}
 }

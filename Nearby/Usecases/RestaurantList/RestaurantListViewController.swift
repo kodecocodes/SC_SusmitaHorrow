@@ -39,10 +39,6 @@ class RestaurantListViewController: UIViewController {
 		presenter.handle(event: .viewDidLoad)
 	}
 
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-	}
-
 	private func configureTableView() {
 		let nib = UINib(nibName: "RestaurantTableViewCell", bundle: Bundle.main)
 		tableView.register(nib, forCellReuseIdentifier: "RestaurantTableViewCell")
@@ -87,7 +83,7 @@ extension RestaurantListViewController: RestaurantListCommandListenerProtocol {
 			self.viewModels = viewModels
 			tableView.reloadData()
 		case .showError(let title, let message):
-			break
+			self.showAlert(title: title, message: message)
 		}
 	}
 }

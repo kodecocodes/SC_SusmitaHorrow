@@ -31,14 +31,14 @@ import UIKit
 
 enum Scene {
 	case restaurantList
-	case restaurantDetail
+	case restaurantDetail(id: String)
 
 	func configure() -> UIViewController {
 		switch self {
 		case .restaurantList:
 			return configureRestaurantList()
-		case .restaurantDetail:
-			return configureRestaurantDetail()
+		case .restaurantDetail(let id):
+			return configureRestaurantDetail(detailId: id)
 		}
 	}
 
@@ -53,8 +53,12 @@ enum Scene {
 		return navigationController
 	}
 
-	func configureRestaurantDetail() -> RestaurantDetailViewController {
+	func configureRestaurantDetail(detailId: String) -> RestaurantDetailViewController {
 		let restaurantDetailVC = RestaurantDetailViewController.storyboardInstance
+		let interactor = RestaurantDetailInteractor()
+		let presenter = RestaurantDetailPresenter(detailId: detailId, interactor: interactor)
+		presenter.commandListener = restaurantDetailVC
+		restaurantDetailVC.presenter = presenter
 		return restaurantDetailVC
 	}
 }

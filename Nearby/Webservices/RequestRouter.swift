@@ -30,11 +30,14 @@ import Foundation
 
 enum RequestRouter: RequestRouterProtocol {
 	case fetchList
+	case fetchDetail(id: String)
 
 	var path: String {
 		switch self {
 		case .fetchList:
 			return "/venues/explore"
+		case .fetchDetail(let id):
+			return "/venues/\(id)"
 		}
 	}
 
@@ -55,12 +58,18 @@ enum RequestRouter: RequestRouterProtocol {
 			        "near": "Noida",
 			        "radius": "1000",
 			        "categoryId": "4d4b7105d754a06374d81259"]
+
+		case .fetchDetail:
+		return ["client_id" : "HW1JRRFVFQVOXQKK2CNV03KWGNTIBTFUUQVBIBUBMUP1WYCL",
+		        "client_secret": "VAEEX52MQNMEL234YIWWJM4EB4W322E2R1A4ZCFLBYYGETMJ",
+		        "v": "20171231"]
+
 		}
 	}
 
 	var method: ActionType {
 		switch self {
-		case .fetchList:
+		case .fetchList, .fetchDetail:
 			return .get
 		}
 	}
