@@ -12,7 +12,7 @@ VIPER architecture was proposed by [Conrad Stoll](https://twitter.com/conradstol
 
 ## Clean Architecture
 
-[[https://cdn-images-1.medium.com/max/1600/1*ZNT5apOxDzGrTKUJQAIcvg.png | width = 700px]]
+![](https://cdn-images-1.medium.com/max/1600/1*ZNT5apOxDzGrTKUJQAIcvg.png?s=700)
 
 The concentric circles represent different areas of software. The further in we go, the higher level the software becomes. The various components follow the **Dependency Rule** to maintain proper boundary among themselves.
 ### The Dependency Rule
@@ -43,7 +43,7 @@ In case of iOS Architecture, we have the following things in this layer.
 This layer generally contains the system framework. Here lies the UIKit, Coredata etc.
 
 ## Crossing Boundaries
-![[https://github.com/raywenderlich/SC_SusmitaHorrow/blob/master/Images/Clean%20Architecture.png | width = 700px]]
+![](https://github.com/raywenderlich/SC_SusmitaHorrow/blob/master/Images/Clean%20Architecture.png?s=700)
 
 1. Classes marked with **(I)** are interfaces. 
 2. Classes marked with **(DS)** are data structures. 
@@ -88,7 +88,7 @@ These architectures differ in the followings ways:
 
 ## **VIP**
 
-[[https://github.com/raywenderlich/SC_SusmitaHorrow/blob/master/Images/VIP.png | width = 700px ]]
+![](https://github.com/raywenderlich/SC_SusmitaHorrow/blob/master/Images/VIP.png?s=700)
 
 In this architecture flow of data occurs as **ViewController -> Interactor -> Presenter -> ViewController**
 
@@ -98,7 +98,7 @@ Here the **ViewController** invokes **Interactor** through **InputBoundary**. **
 
 ## **VIPER**
 
-[[https://github.com/raywenderlich/SC_SusmitaHorrow/blob/master/Images/VIPER.png | width = 700px ]]
+![](https://github.com/raywenderlich/SC_SusmitaHorrow/blob/master/Images/VIPER.png?s=700)
 
 Here the data flow occurs as follows:
 
@@ -112,13 +112,13 @@ Here we have four major interfaces:
                             
 VIP is closer to clean architecture implementation in term of data flow. Whereas VIPER takes care of the proper separation of view and business logic by making **Presenter** responsible for coordination.
 
-[[https://raw.githubusercontent.com/swiftingio/blog/%2324-Architecture-Wars/Images/VIP.png | width = 400px]]        [[https://raw.githubusercontent.com/swiftingio/blog/%2324-Architecture-Wars/Images/VIPER.png | width = 400px]]
+![](https://raw.githubusercontent.com/swiftingio/blog/%2324-Architecture-Wars/Images/VIP.png?s=400)        ![](https://raw.githubusercontent.com/swiftingio/blog/%2324-Architecture-Wars/Images/VIPER.png?s=400)
 
 ## **VIPER Simplified**
 
 In this sample project, I have demonstrated an Event-Command based VIPER architecture which makes use of powerful swift enums. The basic architecture is as follows:
 
-[[https://github.com/raywenderlich/SC_SusmitaHorrow/blob/master/Images/VIPER%20-%20Modified.png | width = 700px]]
+![](https://github.com/raywenderlich/SC_SusmitaHorrow/blob/master/Images/VIPER%20-%20Modified.png?s=700)
 
 * Classes marked with **( I )** are interfaces.
 * Classes marked with **( DS )** are data structures. 
