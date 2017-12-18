@@ -38,10 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		self.window = UIWindow(frame: UIScreen.main.bounds)
 		self.window?.makeKeyAndVisible()
 		Router.shared.launch(scene: .restaurantList)
-		let resource = Resource<RestaurantDetail>(requestRouter: RequestRouter.fetchDetail(id: "50350067e4b0a2d03db58c86"))
-		BaseAPIClient.shared.request(resource) { (result) in
-
-		}
 		return true
 	}
 }
