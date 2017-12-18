@@ -226,11 +226,11 @@
 		789451E01FDE2C6300B95FB0 /* Entities+Parsing */ = {
 			isa = PBXGroup;
 			children = (
-				789451E11FDE2C8C00B95FB0 /* Location+Parsing.swift */,
 				789451E31FDE2E3200B95FB0 /* Restaurant+Parsing.swift */,
+				789451E11FDE2C8C00B95FB0 /* Location+Parsing.swift */,
 				789451E51FDE2F6F00B95FB0 /* SuggestedRestaurants+Parsing.swift */,
-				7836DAA41FDFBB28003042D6 /* RestaurantStats+Parsing.swift */,
 				7836DAA61FDFBBDF003042D6 /* RestaurantDetail+Parsing.swift */,
+				7836DAA41FDFBB28003042D6 /* RestaurantStats+Parsing.swift */,
 			);
 			path = "Entities+Parsing";
 			sourceTree = "<group>";
@@ -382,7 +382,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		ECDE0C344BD9088E64EC5155 /* [CP] Embed Pods Frameworks */ = {
