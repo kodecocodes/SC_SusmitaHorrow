@@ -26,13 +26,13 @@ In other words, nothing in the inner circle(the higher component) can know anyth
 Entities encapsulate enterprise-wise Critical Business Rule. They are meant to be used by many different applications in the enterprise. An entity can be an object with methods, or it can be a set of data structures and functions.
 In case of mobile applications, we have just one single application. In this case the entities represent the business objects of the application. This objects should be affected by the changes in UI layer or any other lower level layers.
 
-### Use cases
-Usecases encapsulate application-specific business rules. They coordinate with the entities to apply Critical Business Rule. 
+### Use Cases
+Use Cases encapsulate application-specific business rules. They coordinate with the entities to apply Critical Business Rule. 
 Let’s take an example.
-Suppose we are building a signup flow. Here one use case would be “User should be able to sign up”. Now the signup involves different objects to be validated. Those validation rules are specified in entities. Whereas Signup method is the part of usecase layer which uses the entities to achieve the goal.
+Suppose we are building a signup flow. Here one use case would be “User should be able to sign up”. Now the signup involves different objects to be validated. Those validation rules are specified in entities. Whereas Signup method is the part of use case layer which uses the entities to achieve the goal.
 
 ### Interface Adapters
-They convert data from the format most convenient for the usecases and entities, to the most convenient for some external agency such as database and web.
+They convert data from the format most convenient for the use cases and entities, to the most convenient for some external agency such as database and web.
 This layer contains the whole of the MVC architecture of a GUI. The presenters, views and controllers all belong in this layer. 
 In case of iOS Architecture, we have the following things in this layer.
 1. ViewControllers
@@ -44,6 +44,8 @@ This layer generally contains the system framework. Here lies the UIKit, Coredat
 
 ## Crossing Boundaries
 ![](https://github.com/raywenderlich/SC_SusmitaHorrow/blob/master/Images/Clean%20Architecture.png?s=700)
+
+
 
 1. Classes marked with **(I)** are interfaces. 
 2. Classes marked with **(DS)** are data structures. 
@@ -99,6 +101,8 @@ Here the **ViewController** invokes **Interactor** through **InputBoundary**. **
 ## **VIPER**
 
 ![](https://github.com/raywenderlich/SC_SusmitaHorrow/blob/master/Images/VIPER.png?s=700)
+
+
 
 Here the data flow occurs as follows:
 
