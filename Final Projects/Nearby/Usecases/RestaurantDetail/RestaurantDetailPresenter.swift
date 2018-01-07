@@ -37,23 +37,6 @@ class RestaurantDetailPresenter {
 		self.detailId = detailId
 		self.detailInteractor = interactor
 	}
-
-	private func fetchDetail() {
-		self.detailInteractor.fetchDetail(id: self.detailId) { result in
-			switch result {
-			case .success(let detail):
-				let viewModel = RestaurantDetailViewModel(restaurantDetail: detail)
-				self.restaurantDetailView?.handle(
-					command: RestaurantDetailPresenterCommand.populateDetail(viewModel: viewModel))
-
-			case .failure(let error):
-				self.restaurantDetailView?.handle(command:
-					RestaurantDetailPresenterCommand.showError(
-						title: error.title,
-						message: error.errorDescription ?? "Error"))
-			}
-		}
-	}
 }
 
 extension RestaurantDetailPresenter: RestauranDetailPresenterProtocol {
@@ -73,7 +56,32 @@ extension RestaurantDetailPresenter: RestauranDetailPresenterProtocol {
 	func handle(event: RestaurantDetailViewEvent) {
 		switch event {
 		case .viewDidLoad:
-			fetchDetail()
+			self.interactor.handle(request: .fetchDetail(id: self.detailId))
+		}
+	}
+}
+
+extension RestaurantDetailPresenter: RestaurantDetailInteractorListenerProtocol {
+	func handle(response: RestaurantDetailInteractorResponse) {
+		switch response {
+		case .didFetchRestaurantDetail(let result):
+			self.handleFetchDetailDone(result: result)
+
+		}
+	}
+	
+	func handleFetchDetailDone(result: ServiceResult<RestaurantDetail>) {
+		switch result {
+		case .success(let detail):
+			let viewModel = RestaurantDetailViewModel(restaurantDetail: detail)
+			self.restaurantDetailView?.handle(
+				command: RestaurantDetailPresenterCommand.populateDetail(viewModel: viewModel))
+
+		case .failure(let error):
+			self.restaurantDetailView?.handle(command:
+				RestaurantDetailPresenterCommand.showError(
+					title: error.title,
+					message: error.errorDescription ?? "Error"))
 		}
 	}
 }

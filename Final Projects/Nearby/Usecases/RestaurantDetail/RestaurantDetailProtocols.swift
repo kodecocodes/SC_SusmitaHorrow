@@ -37,6 +37,23 @@ enum RestaurantDetailPresenterCommand: PresenterCommand {
 	case showError(title: String, message: String)
 }
 
+enum RestaurantDetailInteractorRequest: InteractorRequest {
+	case fetchDetail(id: String)
+}
+
+enum RestaurantDetailInteractorResponse: InteractorResponse {
+	case didFetchRestaurantDetail(result: ServiceResult<RestaurantDetail>)
+}
+
+protocol RestaurantDetailInteractorListenerProtocol: class {
+	func handle(response: RestaurantDetailInteractorResponse)
+}
+
+protocol RestaurantDetailInteractorProtocol {
+	var responseListener: RestaurantDetailInteractorListenerProtocol? { get set }
+	func handle(request: RestaurantDetailInteractorRequest)
+}
+
 protocol RestauranDetailPresenterProtocol {
 	var interactor: RestaurantDetailInteractorProtocol { get }
 	var commandListener: RestaurantDetailCommandListenerProtocol? { get set }
@@ -47,6 +64,3 @@ protocol RestaurantDetailCommandListenerProtocol: class {
 	func handle(command: RestaurantDetailPresenterCommand)
 }
 
-protocol RestaurantDetailInteractorProtocol {
-	func fetchDetail(id: String, completionBlock: @escaping RequestCompletionBlock<RestaurantDetail>)
-}

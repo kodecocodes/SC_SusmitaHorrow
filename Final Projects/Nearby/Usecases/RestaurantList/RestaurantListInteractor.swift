@@ -46,14 +46,10 @@ extension RestaurantListInteractor: RestaurantListInteractorProtocol {
 	func handle(request: RestaurantListInteractorRequest) {
 		switch request {
 		case .fetchNearbyRestaurant:
-			fetchNearby()
-		}
-	}
-
-	private func fetchNearby() {
-		let resource = Resource<SuggestedRestaurants>(requestRouter: RequestRouter.fetchList)
-		self.baseApiClient.request(resource) { [weak self]  result in
-			self?.listener?.handle(response: .didFetchNearbyRestaurant(result))
+			let resource = Resource<SuggestedRestaurants>(requestRouter: RequestRouter.fetchList)
+			self.baseApiClient.request(resource) { [weak self] result in
+				self?.listener?.handle(response: .didFetchNearbyRestaurant(result: result))
+			}
 		}
 	}
 }

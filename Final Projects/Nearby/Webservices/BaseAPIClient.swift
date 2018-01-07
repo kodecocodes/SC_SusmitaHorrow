@@ -63,7 +63,7 @@ class BaseAPIClient {
 		}
 	}
 
-	@discardableResult func request(urlRequest: URLRequestConvertible, completionBlock: @escaping (ServiceResult<JSONObject>) -> ()) -> DataRequest {
+  @discardableResult private func request(urlRequest: URLRequestConvertible, completionBlock: @escaping (ServiceResult<JSONObject>) -> ()) -> DataRequest {
 		return sessionManager.request(urlRequest)
 			.debugLog()
 			.validate(statusCode: 200...299)

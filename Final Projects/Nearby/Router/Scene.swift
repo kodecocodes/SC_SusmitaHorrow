@@ -58,6 +58,7 @@ enum Scene {
 		let restaurantDetailVC = RestaurantDetailViewController.storyboardInstance
 		let interactor = RestaurantDetailInteractor()
 		let presenter = RestaurantDetailPresenter(detailId: detailId, interactor: interactor)
+		interactor.responseListener = presenter
 		presenter.commandListener = restaurantDetailVC
 		restaurantDetailVC.presenter = presenter
 		return restaurantDetailVC

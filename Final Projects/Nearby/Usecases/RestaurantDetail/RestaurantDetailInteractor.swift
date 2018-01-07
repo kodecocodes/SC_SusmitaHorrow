@@ -30,13 +30,27 @@ import Foundation
 
 class RestaurantDetailInteractor {
 	fileprivate var baseApiClient = BaseAPIClient.shared
+	fileprivate weak var listener: RestaurantDetailInteractorListenerProtocol?
+
 }
 
 extension RestaurantDetailInteractor: RestaurantDetailInteractorProtocol {
-	func fetchDetail(id: String, completionBlock: @escaping RequestCompletionBlock<RestaurantDetail>) {
-		let resource = Resource<RestaurantDetail>(requestRouter: RequestRouter.fetchDetail(id: id))
-		self.baseApiClient.request(resource) { result in
-			completionBlock(result)
+	var responseListener: RestaurantDetailInteractorListenerProtocol? {
+		get {
+			return listener
+		}
+		set {
+			listener = newValue
+		}
+	}
+
+	func handle(request: RestaurantDetailInteractorRequest) {
+		switch request {
+		case .fetchDetail(let id):
+			let resource = Resource<RestaurantDetail>(requestRouter: RequestRouter.fetchDetail(id: id))
+			self.baseApiClient.request(resource) { [weak self] result in
+				self?.listener?.handle(response: .didFetchRestaurantDetail(result: result))
+			}
 		}
 	}
 }
