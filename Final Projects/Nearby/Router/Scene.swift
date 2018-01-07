@@ -46,6 +46,7 @@ enum Scene {
 		let restaurantListVC = RestaurantListViewController.storyboardInstance
 		let interactor = RestaurantListInteractor()
 		let presenter = RestaurantListPresenter(interactor: interactor)
+		interactor.responseListener = presenter
 		presenter.scenePresenter = restaurantListVC
 		presenter.commandListener = restaurantListVC
 		restaurantListVC.presenter = presenter

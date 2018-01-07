@@ -38,16 +38,30 @@ enum RestaurantListPresenterCommand: PresenterCommand {
 	case showError(title: String, message: String)
 }
 
-protocol RestaurantListPresenterProtocol {
-	var interactor: RestaurantListInteractorProtocol { get }
-	var commandListener: RestaurantListCommandListenerProtocol? { get set }
-	func handle(event: RestaurantListViewEvent)
+enum RestaurantListInteractorRequest: InteractorRequest {
+	case fetchNearbyRestaurant
 }
 
-protocol RestaurantListCommandListenerProtocol: class {
+enum RestaurantListInteractorResponse: InteractorResponse {
+	case didFetchNearbyRestaurant(result: ServiceResult<SuggestedRestaurants>)
+}
+
+protocol RestaurantListInteractorListenerProtocol: class {
+	func handle(response: RestaurantListInteractorResponse)
+}
+
+protocol RestaurantListInteractorProtocol: class {
+	var responseListener: RestaurantListInteractorListenerProtocol? { get set }
+	func handle(request: RestaurantListInteractorRequest)
+}
+
+protocol RestaurantListPresenterListenerProtocol: class {
 	func handle(command: RestaurantListPresenterCommand)
 }
 
-protocol RestaurantListInteractorProtocol {
-	func fetchNearby(completionBlock: @escaping RequestCompletionBlock<SuggestedRestaurants>)
+protocol RestaurantListPresenterProtocol: class {
+	var interactor: RestaurantListInteractorProtocol { get }
+	var commandListener: RestaurantListPresenterListenerProtocol? { get set }
+	func handle(event: RestaurantListViewEvent)
 }
+

@@ -30,27 +30,12 @@ import Foundation
 
 class RestaurantListPresenter {
 	let restaurantListInteractor: RestaurantListInteractorProtocol
-	weak var restaurantListView: RestaurantListCommandListenerProtocol? = nil
+	weak var listener: RestaurantListPresenterListenerProtocol? = nil
 	weak var scenePresenter: ScenePresenter? = nil
 	private var list: [Restaurant] = []
 
 	init(interactor: RestaurantListInteractorProtocol) {
 		self.restaurantListInteractor = interactor
-	}
-
-	fileprivate func fetchRestaurantList() {
-		self.restaurantListInteractor.fetchNearby { result in
-			switch result {
-			case .success(let suggestedRestaurants):
-				self.list = suggestedRestaurants.list
-				let viewModels = self.list.map { RestaurantViewModel(restaurant: $0) }
-				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.populateList(viewModels: viewModels))
-
-			case .failure(let error):
-				self.restaurantListView?.handle(command: RestaurantListPresenterCommand.showError(
-					title: error.title, message: error.errorDescription ?? ""))
-			}
-		}
 	}
 }
 
@@ -59,24 +44,48 @@ extension RestaurantListPresenter: RestaurantListPresenterProtocol {
 		return self.restaurantListInteractor
 	}
 
-	var commandListener: RestaurantListCommandListenerProtocol? {
+	var commandListener: RestaurantListPresenterListenerProtocol? {
 		get {
-			return self.restaurantListView
+			return self.listener
 		}
 		set {
-			self.restaurantListView = newValue
+			self.listener = newValue
 		}
 	}
 
 	func handle(event: RestaurantListViewEvent) {
 		switch event {
 		case .viewDidLoad:
-			self.fetchRestaurantList()
+			self.restaurantListInteractor.handle(request: .fetchNearbyRestaurant)
 		case .didTapOnRestaurant(let index):
 			let id = self.list[index].id
 			if let scenePresenter = self.scenePresenter {
 				Router.shared.present(scene: .restaurantDetail(id: id), scenePresenter: scenePresenter)
 			}
+		}
+	}
+}
+
+extension RestaurantListPresenter: RestaurantListInteractorListenerProtocol {
+	func handle(response: RestaurantListInteractorResponse) {
+		switch response {
+		case .didFetchNearbyRestaurant(let result):
+			handleRestaurantsReceived(result: result)
+		}
+	}
+
+	fileprivate func handleRestaurantsReceived(result: ServiceResult<SuggestedRestaurants>) {
+		switch result {
+		case .success(let suggestedRestaurants):
+			self.list = suggestedRestaurants.list
+			let viewModels = self.list.map { RestaurantViewModel(restaurant: $0) }
+			let command = RestaurantListPresenterCommand.populateList(viewModels: viewModels)
+			self.listener?.handle(command: command)
+
+		case .failure(let error):
+			let command = RestaurantListPresenterCommand.showError(
+				title: error.title, message: error.errorDescription ?? "")
+			self.listener?.handle(command: command)
 		}
 	}
 }

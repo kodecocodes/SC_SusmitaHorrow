@@ -30,13 +30,30 @@ import Foundation
 
 class RestaurantListInteractor {
 	fileprivate var baseApiClient = BaseAPIClient.shared
+	fileprivate weak var listener: RestaurantListInteractorListenerProtocol?
 }
 
 extension RestaurantListInteractor: RestaurantListInteractorProtocol {
-	func fetchNearby(completionBlock: @escaping RequestCompletionBlock<SuggestedRestaurants>) {
+	var responseListener: RestaurantListInteractorListenerProtocol? {
+		get {
+			return listener
+		}
+		set {
+			listener = newValue
+		}
+	}
+
+	func handle(request: RestaurantListInteractorRequest) {
+		switch request {
+		case .fetchNearbyRestaurant:
+			fetchNearby()
+		}
+	}
+
+	private func fetchNearby() {
 		let resource = Resource<SuggestedRestaurants>(requestRouter: RequestRouter.fetchList)
-		self.baseApiClient.request(resource) { result in
-			completionBlock(result)
+		self.baseApiClient.request(resource) { [weak self]  result in
+			self?.listener?.handle(response: .didFetchNearbyRestaurant(result))
 		}
 	}
 }

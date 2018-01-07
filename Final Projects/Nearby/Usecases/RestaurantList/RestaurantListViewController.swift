@@ -78,7 +78,7 @@ extension RestaurantListViewController: UITableViewDelegate {
 	}
 }
 
-extension RestaurantListViewController: RestaurantListCommandListenerProtocol {
+extension RestaurantListViewController: RestaurantListPresenterListenerProtocol {
 	func handle(command: RestaurantListPresenterCommand) {
 		switch command {
 		case .populateList(let viewModels):
