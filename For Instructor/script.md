@@ -18,7 +18,7 @@ Hi everyone, this is Susmita. In today’s screencast, I will build an app to fe
 
 ## Talking Head
 
-### Show Slide 1
+### [Slide 01]
 VIPER architecture is based on Clean Architecture proposed by Uncle Bob, which divides the parts of a software into pluggable layers so that the software is easy to maintain and extend. So this diagram shows different components of VIPER archirecture. It has the following components, Entity, Interactor, Presenter, Router and View.
 
 - An entity represents the business object of the application. It can be an object with methods, or it can be a set of data structures and functions. For our app, it would be the Restuarant object. The entity layer should not be affected by the changes in UI layer or any other lower level layers. Therefore an entity should never hold an reference to an interactor or a presenter.
@@ -27,7 +27,8 @@ VIPER architecture is based on Clean Architecture proposed by Uncle Bob, which d
 - A view sends view events like button tap, cell selection etc to the presenter which invokes appropriate interactor method. On receiving, viewModels, the view renders them.
 - The router is responsible for navigation between the viewcontrollers.
 
-### Show Slide 2
+### [Slide 02]
+
 
 This figure shows message passing takes place between the components.
 
@@ -59,7 +60,7 @@ protocol InteractorResponse {}
 
 ## Talking Head
 
-### Show Slide 3
+### [Slide 03]
 
 This figure shows the navigation between the flows. 
 
@@ -111,13 +112,13 @@ enum Scene {
 	}
 
 	func configureRestaurantList() -> UINavigationController {
-  		let restaurantListVC = RestaurantListViewController.storyboardInstance
+		let restaurantListVC = RestaurantListViewController.storyboardInstance
 		return UINavigationController(rootViewController: restaurantListVC)
 	}
 
 	func configureRestaurantDetail(detailId: String) -> RestaurantDetailViewController {
-  		let restaurantDetailVC = RestaurantDetailViewController.storyboardInstance
-  		return restaurantDetailVC
+		let restaurantDetailVC = RestaurantDetailViewController.storyboardInstance
+		return restaurantDetailVC
 	}
 }
 ```
@@ -133,7 +134,7 @@ Present will present the viewcontroller return by the scene.configure.
 class Router {
 	static var shared = Router()
 	private init() {}
-	
+
 	func launch(scene: Scene) {
 		let window = UIApplication.shared.keyWindow
 		let viewController = scene.configure()
@@ -162,11 +163,10 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 
 ## Talking Head
 
-Now let's move on building other components.
+Now let's move on building other components. I will start with defining enums for message passing.
 ## Demo
 
-Now I will open **RestaurantListProtocols.swift** and start configuring the use case **Fetch Nearby Restaurants** by defining enums required for message passing in RestaurantListProtocols.swift.
-- First, I will create an enum **RestaurantListViewEvent** by conforming to protocol **ViewEvent**. We have two events here, one is viewDidLoad and other is didTapOnRestaurant.
+Now I will open **RestaurantListProtocols.swift** and create an enum **RestaurantListViewEvent** by conforming to protocol **ViewEvent**. We have two events here, one is viewDidLoad and other is didTapOnRestaurant.
 
 ```
 enum RestaurantListViewEvent: ViewEvent {
@@ -280,12 +280,20 @@ extension RestaurantListInteractor: RestaurantListInteractorProtocol {
      }
   }
   func handle(request: RestaurantListInteractorRequest) {}
+}
 ```
 - Then I will implement the handle method. I will switch through all the cases of RestaurantListInteractorRequest. Here we have just one case, fetchNearbyRestaurant. I will create an instance of resource of type Resource<SuggestedRestaurants>. This object encapsulates all the information required for fetching data from server as well as parsing information. I just need to pass which endpoint to hit, which is **RequestRouter.fetchList** for this use case.
 
 ```
-let resource = Resource<SuggestedRestaurants>(requestRouter: RequestRouter.fetchList)			self.baseApiClient.request(resource) { [weak self] result in
-    self?.listener?.handle(response: .didFetchNearbyRestaurant(result: result))
+func handle(request: RestaurantListInteractorRequest) {
+		switch request {
+		case .fetchNearbyRestaurant:
+			let resource = Resource<SuggestedRestaurants>(requestRouter: RequestRouter.fetchList)
+			self.baseApiClient.request(resource) { [weak self] result in
+				self?.listener?.handle(response: .didFetchNearbyRestaurant(result: result))
+			}
+		}
+	}
 }
 
 ```
@@ -307,7 +315,7 @@ class RestaurantListPresenter {
     private var list: [Restaurant] = []
 
     init(interactor: RestaurantListInteractorProtocol) {
-	self.restaurantListInteractor = interactor
+		self.restaurantListInteractor = interactor
     }
 }
 ```
@@ -320,12 +328,13 @@ extension RestaurantListPresenter: RestaurantListInteractorListenerProtocol {
          handleRestaurantsReceived(result: result)
      }
   }
+}
 ```
 In the success case, I will save the received list. I will convert the suggestedRestaurants.list to array of RestaurantViewModel. Then I will create a command RestaurantListPresenterCommand.populateList with the array of view models. Then I will call listener.handle(command: command)
 In the error case, I will create command RestaurantListPresenterCommand.showError and  I will call listener.handle(command: command).
 
 ```
-fileprivate func handleRestaurantsReceived(result: ServiceResult<SuggestedRestaurants>) {
+private func handleRestaurantsReceived(result: ServiceResult<SuggestedRestaurants>) {
    switch result {
      case .success(let suggestedRestaurants):
        self.list = suggestedRestaurants.list
@@ -357,7 +366,7 @@ extension RestaurantListPresenter: RestaurantListPresenterProtocol {
   func handle(event: RestaurantListViewEvent) {}
 }
 ```
-- Now in the handle method, we need to handle two cases. one is viewDidLoad and the other is didTapOnRestaurant. For the time being, we will just implement viewDidLoad. On ViewDidLoad, we will call    self.restaurantListInteractor.handle(request: .fetchNearbyRestaurant).
+- Now in the handle method, we need to handle two cases. one is viewDidLoad and the other is didTapOnRestaurant. For the time being, we will just implement viewDidLoad. On ViewDidLoad, we will call  self.restaurantListInteractor.handle(request: .fetchNearbyRestaurant).
 On didTapOnRestaurant, we will get id of selected restaurant and present the restaurantDetail scene.
 
 ```
@@ -378,7 +387,7 @@ func handle(event: RestaurantListViewEvent) {
 ## Talking Head
 
 Now let’s extend RestaurantListViewController to conform to protocol RestaurantListViewController. It would implement handle method and have to handle two commands.
-On populateList, we will call tableView.reloadData()
+On populateList, we will save the received viewModels and call tableView.reloadData()
 On showError, we will show an alert.
 
 ## Code
@@ -412,6 +421,28 @@ extension RestaurantListViewController: ScenePresenter {
 	}
 }
 ```
+
+## Talking Head
+Now we need to invoke proper ViewEvents. Let's add a property **presenter** of type RestaurantListPresenterProtocol.
+In the method ViewDidLoad, I'll call presenter?.handle with event viewDidLoad.
+```
+override func viewDidLoad() {
+	super.viewDidLoad()
+	self.configureTableView()
+	presenter?.handle(event: .viewDidLoad)
+}
+
+```
+In the tableView didSelectAtIndexPath, I'll call presenter?.handle with event .didTapOnRestaurant(index: indexPath.row)
+```
+extension RestaurantListViewController: UITableViewDelegate {
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		presenter?.handle(event: .didTapOnRestaurant(index: indexPath.row))
+	}
+}
+
+```
+
 
 ## Talking Head
 We have our presenter, interactor and view ready. We need to plug them together now. I will update configureRestaurantList method.
